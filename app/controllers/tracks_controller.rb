@@ -19,4 +19,20 @@ class TracksController < ApplicationController
 
     render partial: "shared/player", locals: {track: next_track}
   end
+
+  def index
+    puts "In index"
+    artist = Artist.find(params[:artist_id])
+    page = params[:page].to_i
+    tracks = get_tracks(artist, page)
+    next_page = tracks.length == 5 ? page + 1 : nil
+
+    render action: :index, locals: {artist:, tracks:, page:, next_page:}
+  end
+
+  private
+
+  def get_tracks(artist, page)
+    artist.tracks.popularity_ordered.limit(5).offset(5 * page)
+  end
 end

@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "tracks_page_#{page}" do %>
+  <% tracks.each_with_index do |track, i| %>
+    <%= render track, track_counter: page * 5 + i, enqueueble: true %>
+  <% end %>
+  <% if next_page %>
+    <%= render partial: 'tracks/load_page', locals: { page: next_page, artist: artist } %>
+  <% end %>
+<% end %>
