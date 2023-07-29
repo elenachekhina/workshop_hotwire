@@ -16,17 +16,12 @@
   </div>
 </div>
 
-<hr class="my-4">
-
-<h2 class="mt-4 text-header-2">Popular</h2>
-<ul class="tracks mt-2">
-  <%= render tracks, enqueueble: true %>
-  <li class="track">
-    <span class="track--number"></span>
-    <%= link_to 'See all', artist_tracks_path(artist, page: 0), class: "text-secondary hover:text-primary transition-colors" %>
-  </li>
-</ul>
-
-<hr class="my-4"/>
-
-<%= render partial: "discography", locals: {artist:, albums:} %>
+<h2 class="mt-4 text-header-2">Tracks</h2>
+<%= turbo_frame_tag "tracks_page_#{page}" do %>
+  <% tracks.each_with_index do |track, i| %>
+    <%= render track, track_counter: page * page_size + i, enqueueble: true %>
+  <% end %>
+  <% if next_page %>
+    <%= render partial: 'tracks/load_page', locals: { page: next_page, artist: artist } %>
+  <% end %>
+<% end %>
