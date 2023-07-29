@@ -1,25 +1,6 @@
-<div class="artist-header">
-  <div class="artist-image">
-    <% if artist.cover.attached? %>
-      <%= image_tag artist.cover %>
-    <% end %>
-  </div>
-  <div class="artist-info">
-    <div class="flex items-center">
-      <h1 class="text-header-2"><%= artist.name %></h1>
-    </div>
-    <div>
-      <% artist.tags.each do |tag| %>
-        <span class="meta"><%= tag %></span>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<h2 class="mt-4 text-header-2">Tracks</h2>
 <%= turbo_frame_tag "tracks_page_#{page}" do %>
   <% tracks.each_with_index do |track, i| %>
-    <%= render track, track_counter: page * page_size + i, enqueueble: true %>
+    <%= render track, track_counter: page * 5 + i, enqueueble: true %>
   <% end %>
   <% if next_page %>
     <%= render partial: 'tracks/load_page', locals: { page: next_page, artist: artist } %>

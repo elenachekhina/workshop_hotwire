@@ -21,19 +21,18 @@ class TracksController < ApplicationController
   end
 
   def index
-    page_size = 25
+    puts "In index"
     artist = Artist.find(params[:artist_id])
     page = params[:page].to_i
-    tracks = get_tracks(artist, page, page_size)
-    next_page = tracks.length == page_size ? page + 1 : nil
+    tracks = get_tracks(artist, page)
+    next_page = tracks.length == 5 ? page + 1 : nil
 
-
-    render action: :index, locals: {artist:, tracks:, page:, next_page:, page_size:}
+    render action: :index, locals: {artist:, tracks:, page:, next_page:}
   end
 
   private
 
-  def get_tracks(artist, page, page_size)
-    artist.tracks.popularity_ordered.limit(page_size).offset(page_size * page)
+  def get_tracks(artist, page)
+    artist.tracks.popularity_ordered.limit(5).offset(5 * page)
   end
 end
