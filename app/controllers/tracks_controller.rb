@@ -19,4 +19,5 @@ class TracksController < ApplicationController
 
     render partial: "shared/player", locals: {track: next_track}
   end
+
 end
