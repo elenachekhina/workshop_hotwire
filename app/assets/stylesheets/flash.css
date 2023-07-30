@@ -1,6 +1,15 @@
 @layer components {
   .flash {
     @apply max-w-sm bg-white opacity-95 border-t-4 border-slate-900 rounded-b text-black px-4 py-3 shadow-md;
+    @apply flex justify-between items-center;
+  }
+
+  .flash p.text-small {
+    @apply m-0;
+  }
+
+  .flash .close-icon {
+    @apply order-2;
   }
 
   .flash.notice {
