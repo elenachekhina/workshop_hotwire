@@ -17,8 +17,10 @@
           </div>
         <% end %>
         <%= f.text_field :username, value: @user.username, require: true, autofocus: true, autocomplete: "username", class: "input mt-2", placeholder: "Username" %>
-        <%= f.password_field :password, required: true, autocomplete: "new-password", class: "input mt-2", placeholder: "Password" %>
-         <%= f.password_field :password_confirmation, required: true, autocomplete: "new-password", class: "input mt-2", placeholder: "Confirmation" %>
+
+        <%= render partial: 'shared/password', locals: { form: f, name: :password, required: true, autocomplete: "new-password", placeholder: "Password" } %>
+        <%= render partial: 'shared/password', locals: { form: f, name: :password_confirmation, required: true, autocomplete: "new-password", placeholder: "Confirmation" } %>
+
         <div class="flex flex-row justify-between items-baseline">
           <%= f.submit "Sign up", class: "button button-primary mt-2" %>
           <%= link_to "Log in", sign_in_path, class: "text-small opacity-50 hover:opacity-100" %>
