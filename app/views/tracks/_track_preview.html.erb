@@ -1,0 +1,5 @@
+<%# locals: (track:, track_counter: nil, track_iteration: nil, deletable: false, enqueueble: false) -%>
+<li class="nav--search--result">
+  <p class="hover:text-primary"><%= track.title %></p>
+  <%= link_to track.album.artist.name, artist_path(track.album.artist), class: "ml-2 text-secondary text-xsmall", data: { action: "click->search#clear" } %>
+</li>
