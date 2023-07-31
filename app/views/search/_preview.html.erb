@@ -1,0 +1,15 @@
+<%= turbo_frame_tag 'search_preview', target: "_top" do %>
+  <ul class="nav--search--results">
+    <% @artists.each do |artist| %>
+      <%= render partial: 'artists/artist_preview', locals: { artist: artist } %>
+    <% end %>
+
+    <% @albums.each do |album| %>
+      <%= render partial: 'albums/album_preview', locals: { album: album } %>
+    <% end %>
+
+    <% @tracks.each do |track| %>
+      <%= render partial: 'tracks/track_preview', locals: { track: track } %>
+    <% end %>
+  </ul>
+<% end %>
