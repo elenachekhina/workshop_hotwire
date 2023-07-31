@@ -4,7 +4,7 @@
       <div class="nav--search--icon">
         <%= render "icons/search" %>
       </div>
-      <%= f.search_field :q, value: params[:q], class: "nav--search--input search", data: { action: "input->search#search keyup->search#handleEnter", search_target: "search" } %>
+      <%= f.search_field :q, value: params[:q], class: "nav--search--input search", data: { action: "keydown->search#handleEnter input->search#search", search_target: "search" } %>
     <% end %>
     <%= turbo_frame_tag 'search_preview', data: { search_target: "preview" }, target: "_top" %>
   </div>
