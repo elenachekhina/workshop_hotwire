@@ -3,7 +3,7 @@ class ListenerChannel < ApplicationCable::Channel
     station = LiveStation.find(params[:id])
     stream_from "listener-#{station}" if station
 
-    station.add_listener!!
+    station.add_listener!
     Turbo::StreamsChannel.broadcast_replace_to "station-#{station.id}-listeners", target: "player_listeners", content: broadcast_station(station)
   end
 
