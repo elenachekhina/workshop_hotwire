@@ -41,3 +41,5 @@
 /db/**/*.sqlite3
 /db/**/*.sqlite3-*
 bin/dist
+.idea/*
+node_modules/*

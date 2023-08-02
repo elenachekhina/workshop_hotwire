@@ -14,13 +14,21 @@ function secondsToDuration(num) {
 export default class extends Controller {
   static targets = ["progress", "time"];
   static outlets = ["track"];
-  static values = { duration: Number, track: String, nextTrackUrl: String };
+  static values = { duration: Number, track: String, nextTrackUrl: String, command: String };
   static classes = ["playing"];
 
   initialize() {
     this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
     this.handleEnded = this.handleEnded.bind(this);
     this.playing = false;
+  }
+
+  commandValueChanged() {
+    if (this.commandValue == 'continue') {
+      this.play();
+    } else if (this.commandValue == 'pause') {
+      this.pause();
+    }
   }
 
   trackValueChanged() {
