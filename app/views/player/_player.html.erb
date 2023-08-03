@@ -6,7 +6,6 @@
   data-player-playing-class="player-playing"
   data-player-next-track-url-value="<%= live ? play_next_live_station_path : (!station && play_next_track_path(track))%>"
   data-player-track-outlet=".track"
-  data-player-station-value="<%= station&.id %>"
 >
   <% if track %>
     <div class="player--timeline" data-action="<%= "click->player#seek" if live || !station %>">
@@ -46,8 +45,7 @@
             <%= station.name%>
           </span>
         </div>
-        <div data-controller="listener" data-listener-player-outlet=".player"></div>
-        <%= turbo_stream_from station %>
+        <%= turbo_stream_from station, channel: ListenerChannel, data: { id: station.id } %>
       <% end %>
     <% end %>
     <% if track %>

@@ -1,3 +1,3 @@
-import { createConsumer } from "@rails/actioncable"
+import { createConsumer } from "@anycable/web";
 
 export default createConsumer()

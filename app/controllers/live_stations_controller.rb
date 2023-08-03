@@ -60,7 +60,7 @@ class LiveStationsController < ApplicationController
 
     track = station.play_next
 
-    Turbo::StreamsChannel.broadcast_update_to station, target: :player, partial: "player/player", locals: {station:, track:}
+    Turbo::StreamsChannel.broadcast_update_to station, channel: "ListenerChannel", target: :player, partial: "player/player", locals: {station:, track:}
 
     render turbo_stream: [
       turbo_stream.update("player", partial: "player/player", locals: {station:, track:, live: true}),
