@@ -27,8 +27,12 @@ class TracksController < ApplicationController
     tracks = get_tracks(artist, page, page_size)
     next_page = tracks.length == page_size ? page + 1 : nil
 
+    if page == 0
+      render action: :index, locals: {artist:, tracks:, page:, next_page:, page_size:}
+    else
+      render partial: 'tracks/tracks_page', locals: {artist:, tracks:, page:, next_page:, page_size:}
+    end
 
-    render action: :index, locals: {artist:, tracks:, page:, next_page:, page_size:}
   end
 
   private

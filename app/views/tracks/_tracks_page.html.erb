@@ -1,0 +1,6 @@
+<%= turbo_frame_tag "tracks_page_#{page}" do %>
+  <%= render tracks, start_num: page * page_size, enqueueble: true %>
+  <% if next_page %>
+    <%= turbo_frame_tag "tracks_page_#{next_page}", src: artist_tracks_path(artist, page: next_page), loading: "lazy" %>
+  <% end %>
+<% end %>

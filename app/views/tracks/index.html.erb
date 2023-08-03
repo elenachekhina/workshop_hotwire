@@ -17,11 +17,4 @@
 </div>
 
 <h2 class="mt-4 text-header-2">Tracks</h2>
-<%= turbo_frame_tag "tracks_page_#{page}" do %>
-  <% tracks.each_with_index do |track, i| %>
-    <%= render track, track_counter: page * page_size + i, enqueueble: true %>
-  <% end %>
-  <% if next_page %>
-    <%= render partial: 'tracks/load_page', locals: { page: next_page, artist: artist } %>
-  <% end %>
-<% end %>
+<%= render partial: 'tracks/tracks_page', locals: { tracks: tracks, page: page, next_page: next_page, page_size: page_size, artist: artist } %>
