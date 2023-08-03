@@ -13,8 +13,8 @@ class ListenerChannel < ActionCable::Channel::Base
 
   def unsubscribed
     station = LiveStation.find(params[:id])
-    station.add_listener!(-1)
 
+    station.add_listener!(-1)
     Turbo::StreamsChannel.broadcast_replace_to "station-#{station.id}-listeners", target: "player_listeners", content: broadcast_station(station)
   end
 
