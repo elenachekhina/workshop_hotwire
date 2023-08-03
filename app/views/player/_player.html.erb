@@ -25,11 +25,18 @@
   <div class="player--track">
     <% if station %>
       <% if live %>
+        <%= turbo_stream_from "station-#{station.id}-listeners" %>
         <div class="player--radio">
           <span class="player--signal-icon">
             <%= render "icons/signal" %>
           </span>
           <%= link_to "Live!", live_station_path, class: "player--title ml-2" %>
+          <span class="player--listeners">
+            <span class="player--listeners--icon">
+              <%= render 'icons/listener' %>
+              <span class="player--listeners--count" id="player_listeners"><%= station.listeners %></span>
+            </span>
+          </span>
         </div>
       <% else %>
         <div class="player--radio">
@@ -38,7 +45,7 @@
             <%= station.name%>
           </span>
         </div>
-        <%= turbo_stream_from station %>
+        <%= turbo_stream_from station, channel: ListenerChannel, data: { id: station.id } %>
       <% end %>
     <% end %>
     <% if track %>

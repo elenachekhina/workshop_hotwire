@@ -51,6 +51,8 @@ class LiveStationsController < ApplicationController
       turbo_stream.update(dom_id(station, :queue), partial: "queue", locals: {station:}),
       turbo_stream.replace(dom_id(station, :info), partial: "info", locals: {station:})
     ]
+
+    station.reset_listeners
   end
 
   def play_next
@@ -58,7 +60,7 @@ class LiveStationsController < ApplicationController
 
     track = station.play_next
 
-    Turbo::StreamsChannel.broadcast_update_to station, target: :player, partial: "player/player", locals: {station:, track:}
+    Turbo::StreamsChannel.broadcast_update_to station, channel: "ListenerChannel", target: :player, partial: "player/player", locals: {station:, track:}
 
     render turbo_stream: [
       turbo_stream.update("player", partial: "player/player", locals: {station:, track:, live: true}),
